@@ -8,8 +8,8 @@
       "trust_rule": "Only rows whose member list is marked exact are auto-derived"
     },
     {
-      "path": "survivor_io_normal_pets_summary.csv",
-      "role": "Normal-pet awakening type mapping for the four-type Y5 Xeno gate",
+      "path": "data/survivor_io_normal_pets_summary.csv",
+      "role": "Source-only normal-pet awakening type mapping for the four-type Y5 Xeno gate",
       "trust_rule": "Collaboration pets without supported awakening groups are excluded"
     }
   ],
