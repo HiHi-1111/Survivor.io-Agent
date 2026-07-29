@@ -1,0 +1,31 @@
+﻿Equipment_Slot,SS_Equipment,Scope,Relic_Cores,Eternal_Cores,Void_Cores,Chaos_Cores,Xeno_Transmute_Cores,Base_Tech_Materials,Epic_Eternal_Fodder,Legend_Eternal_Fodder,Epic_Void_Fodder,Legend_Void_Fodder,Epic_Chaos_Fodder,Legend_Chaos_Fodder,Notes
+Weapon,Twin Lance - Starforged Havoc,Astral Forge E1-E5 + V1-V5,38,210,210,0,0,6000,6,1,6,1,0,0,Does not include Cosmic Cast.
+Weapon,Twin Lance - Starforged Havoc,Chaos Fusion CF1-CF10,45,0,0,1040,0,0,0,0,0,0,8,4,Chaos fodder: Sword of Disorder.
+Weapon,Twin Lance - Starforged Havoc,Xeno Transmute XT1-XT13,0,810,930,0,60,0,0,0,0,0,0,0,Released. Costs for unreleased tracks are projected from the standard current Xeno cost array.
+Weapon,Twin Lance - Starforged Havoc,AF + CF + XT (excluding Cosmic Cast),83,1020,1140,1040,60,6000,6,1,6,1,8,4,XT is projected for Gloves/Boots because those tracks are not released in the current source snapshot.
+Weapon,Twin Lance - Starforged Havoc,Cosmic Cast + AF + CF + XT,83,1070,1190,1040,60,8000,6,1,6,1,8,4,"Cosmic Cast adds 50 Eternal Cores, 50 Void Cores and 2,000 Base Tech Materials."
+Armor,Evervoid Armor - Starforged Havoc,Astral Forge E1-E5 + V1-V5,38,210,210,0,0,6000,6,1,6,1,0,0,Does not include Cosmic Cast.
+Armor,Evervoid Armor - Starforged Havoc,Chaos Fusion CF1-CF10,45,0,0,1040,0,0,0,0,0,0,8,4,Chaos fodder: Armor of Quietus.
+Armor,Evervoid Armor - Starforged Havoc,Xeno Transmute XT1-XT13,0,810,930,0,60,0,0,0,0,0,0,0,Released / track present in current source snapshot. Costs for unreleased tracks are projected from the standard current Xeno cost array.
+Armor,Evervoid Armor - Starforged Havoc,AF + CF + XT (excluding Cosmic Cast),83,1020,1140,1040,60,6000,6,1,6,1,8,4,XT is projected for Gloves/Boots because those tracks are not released in the current source snapshot.
+Armor,Evervoid Armor - Starforged Havoc,Cosmic Cast + AF + CF + XT,83,1070,1190,1040,60,8000,6,1,6,1,8,4,"Cosmic Cast adds 50 Eternal Cores, 50 Void Cores and 2,000 Base Tech Materials."
+Necklace,Judgment Necklace - Starforged Havoc,Astral Forge E1-E5 + V1-V5,38,210,210,0,0,6000,6,1,6,1,0,0,Does not include Cosmic Cast.
+Necklace,Judgment Necklace - Starforged Havoc,Chaos Fusion CF1-CF10,45,0,0,1040,0,0,0,0,0,0,8,4,Chaos fodder: Stone of Cleaving.
+Necklace,Judgment Necklace - Starforged Havoc,Xeno Transmute XT1-XT13,0,810,930,0,60,0,0,0,0,0,0,0,Released / track present in current source snapshot. Costs for unreleased tracks are projected from the standard current Xeno cost array.
+Necklace,Judgment Necklace - Starforged Havoc,AF + CF + XT (excluding Cosmic Cast),83,1020,1140,1040,60,6000,6,1,6,1,8,4,XT is projected for Gloves/Boots because those tracks are not released in the current source snapshot.
+Necklace,Judgment Necklace - Starforged Havoc,Cosmic Cast + AF + CF + XT,83,1070,1190,1040,60,8000,6,1,6,1,8,4,"Cosmic Cast adds 50 Eternal Cores, 50 Void Cores and 2,000 Base Tech Materials."
+Belt,Stardust Sash - Starforged Havoc,Astral Forge E1-E5 + V1-V5,38,210,210,0,0,6000,6,1,6,1,0,0,Does not include Cosmic Cast.
+Belt,Stardust Sash - Starforged Havoc,Chaos Fusion CF1-CF10,45,0,0,1040,0,0,0,0,0,0,8,4,Chaos fodder: Twisting Belt.
+Belt,Stardust Sash - Starforged Havoc,Xeno Transmute XT1-XT13,0,810,930,0,60,0,0,0,0,0,0,0,Pre-release data present; official store listing still said 'available soon' in July 2026. Costs for unreleased tracks are projected from the standard current Xeno cost array.
+Belt,Stardust Sash - Starforged Havoc,AF + CF + XT (excluding Cosmic Cast),83,1020,1140,1040,60,6000,6,1,6,1,8,4,XT is projected for Gloves/Boots because those tracks are not released in the current source snapshot.
+Belt,Stardust Sash - Starforged Havoc,Cosmic Cast + AF + CF + XT,83,1070,1190,1040,60,8000,6,1,6,1,8,4,"Cosmic Cast adds 50 Eternal Cores, 50 Void Cores and 2,000 Base Tech Materials."
+Gloves,Moonscar Bracer - Starforged Havoc,Astral Forge E1-E5 + V1-V5,38,210,210,0,0,6000,6,1,6,1,0,0,Does not include Cosmic Cast.
+Gloves,Moonscar Bracer - Starforged Havoc,Chaos Fusion CF1-CF10,45,0,0,1040,0,0,0,0,0,0,8,4,Chaos fodder: Chaos Gauntlet.
+Gloves,Moonscar Bracer - Starforged Havoc,Xeno Transmute XT1-XT13,0,810,930,0,60,0,0,0,0,0,0,0,Not released; no gear-specific Xeno track in current source snapshot. Costs for unreleased tracks are projected from the standard current Xeno cost array.
+Gloves,Moonscar Bracer - Starforged Havoc,AF + CF + XT (excluding Cosmic Cast),83,1020,1140,1040,60,6000,6,1,6,1,8,4,XT is projected for Gloves/Boots because those tracks are not released in the current source snapshot.
+Gloves,Moonscar Bracer - Starforged Havoc,Cosmic Cast + AF + CF + XT,83,1070,1190,1040,60,8000,6,1,6,1,8,4,"Cosmic Cast adds 50 Eternal Cores, 50 Void Cores and 2,000 Base Tech Materials."
+Boots,Glacial Warboots - Starforged Havoc,Astral Forge E1-E5 + V1-V5,38,210,210,0,0,6000,6,1,6,1,0,0,Does not include Cosmic Cast.
+Boots,Glacial Warboots - Starforged Havoc,Chaos Fusion CF1-CF10,45,0,0,1040,0,0,0,0,0,0,8,4,Chaos fodder: Shoes of Confusion.
+Boots,Glacial Warboots - Starforged Havoc,Xeno Transmute XT1-XT13,0,810,930,0,60,0,0,0,0,0,0,0,Not released; no gear-specific Xeno track in current source snapshot. Costs for unreleased tracks are projected from the standard current Xeno cost array.
+Boots,Glacial Warboots - Starforged Havoc,AF + CF + XT (excluding Cosmic Cast),83,1020,1140,1040,60,6000,6,1,6,1,8,4,XT is projected for Gloves/Boots because those tracks are not released in the current source snapshot.
+Boots,Glacial Warboots - Starforged Havoc,Cosmic Cast + AF + CF + XT,83,1070,1190,1040,60,8000,6,1,6,1,8,4,"Cosmic Cast adds 50 Eternal Cores, 50 Void Cores and 2,000 Base Tech Materials."
