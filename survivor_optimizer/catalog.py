@@ -4,9 +4,10 @@ import copy
 import csv
 import json
 import operator
+from collections.abc import Iterable, Mapping
 from dataclasses import dataclass, field
 from pathlib import Path
-from typing import Any, Iterable, Mapping
+from typing import Any
 
 from .transitions import BuildState, StateTransitionEngine, TransitionAction
 
@@ -133,12 +134,14 @@ class OptimizerAction:
         return cls(
             action_key=str(data.get("action_key", transition_data["action_id"])),
             transition=TransitionAction.from_dict(transition_data),
-            requirements=tuple(Requirement.from_dict(v) for v in data.get("requirements", [])),
+            requirements=tuple(
+                Requirement.from_dict(value) for value in data.get("requirements", [])
+            ),
             sio_mutation=SioMutation.from_dict(data.get("sio_mutation")),
             inverse_sio_mutation=SioMutation.from_dict(inverse_data),
-            tags=tuple(str(v) for v in data.get("tags", [])),
+            tags=tuple(str(value) for value in data.get("tags", [])),
             source_status=str(data.get("source_status", "")),
-            source_urls=tuple(str(v) for v in data.get("source_urls", [])),
+            source_urls=tuple(str(value) for value in data.get("source_urls", [])),
             allows_unknown_refund=bool(data.get("allows_unknown_refund", False)),
         )
 
@@ -172,25 +175,29 @@ class ActionCatalog:
     @classmethod
     def from_dict(cls, data: Mapping[str, Any]) -> ActionCatalog:
         return cls(
-            actions=[OptimizerAction.from_dict(v) for v in data.get("actions", [])],
+            actions=[OptimizerAction.from_dict(value) for value in data.get("actions", [])],
             collection_sets=[
                 CollectionSetDefinition(
-                    set_id=str(v["set_id"]),
-                    set_name=str(v.get("set_name", v["set_id"])),
-                    members=tuple(str(member) for member in v.get("members", [])),
-                    exact_members=bool(v.get("exact_members", True)),
+                    set_id=str(value["set_id"]),
+                    set_name=str(value.get("set_name", value["set_id"])),
+                    members=tuple(str(member) for member in value.get("members", [])),
+                    exact_members=bool(value.get("exact_members", True)),
                 )
-                for v in data.get("collection_sets", [])
+                for value in data.get("collection_sets", [])
             ],
             derived_rules=[
                 DerivedUnlockRule(
-                    flag=str(v["flag"]),
-                    requirements=tuple(Requirement.from_dict(r) for r in v.get("requirements", [])),
+                    flag=str(value["flag"]),
+                    requirements=tuple(
+                        Requirement.from_dict(requirement)
+                        for requirement in value.get("requirements", [])
+                    ),
                 )
-                for v in data.get("derived_rules", [])
+                for value in data.get("derived_rules", [])
             ],
             normal_pet_type_by_name={
-                str(k): str(v) for k, v in dict(data.get("normal_pet_type_by_name", {})).items()
+                str(key): str(value)
+                for key, value in dict(data.get("normal_pet_type_by_name", {})).items()
             },
         )
 
@@ -267,13 +274,17 @@ class DerivedUnlockEngine:
         self.catalog = catalog
 
     def recompute(self, state: BuildState) -> set[str]:
-        state.flags = {flag for flag in state.flags if not flag.startswith(self.AUTO_PREFIX)}
+        state.flags = {
+            flag for flag in state.flags if not flag.startswith(self.AUTO_PREFIX)
+        }
         derived: set[str] = set()
         owned_collectibles = self._owned_collectibles(state)
         for definition in self.catalog.collection_sets:
             if not definition.exact_members:
                 continue
-            if definition.members and all(member in owned_collectibles for member in definition.members):
+            if definition.members and all(
+                member in owned_collectibles for member in definition.members
+            ):
                 derived.add(f"auto:collection_set:{definition.set_id}")
                 derived.add(f"auto:collection_set_name:{definition.set_name}")
 
