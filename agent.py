@@ -9,6 +9,11 @@ from composio import Composio
 from composio_openai_agents import OpenAIAgentsProvider
 from dotenv import load_dotenv
 
+from survivor_optimizer.optimizer_tools import (
+    list_profile_purchase_options_json,
+    optimize_profile_with_sio_json,
+    validate_optimizer_profile_json,
+)
 from survivor_optimizer.tools import (
     list_transition_rules_json,
     plan_reset_json,
@@ -59,6 +64,58 @@ def list_verified_transition_rules() -> str:
     return list_transition_rules_json()
 
 
+@function_tool
+def validate_optimizer_profile(
+    profile_json: str,
+    catalog_json: str = "",
+    repository_root: str = ".",
+) -> str:
+    """Validate inventory, ledger, automatic unlocks, and optimizer goals."""
+    return validate_optimizer_profile_json(
+        profile_json=profile_json,
+        catalog_json=catalog_json,
+        repository_root=repository_root,
+    )
+
+
+@function_tool
+def list_optimizer_options(
+    profile_json: str,
+    request_json: str,
+    catalog_json: str = "",
+    repository_root: str = ".",
+) -> str:
+    """List legal purchases, configuration changes, and real refund branches."""
+    return list_profile_purchase_options_json(
+        profile_json=profile_json,
+        request_json=request_json,
+        catalog_json=catalog_json,
+        repository_root=repository_root,
+    )
+
+
+@function_tool
+def optimize_profile_with_sio(
+    profile_json: str,
+    request_json: str,
+    catalog_json: str = "",
+    repository_root: str = ".",
+    sio_bundle_dir: str = "",
+    model_path: str = "",
+    gate_path: str = "",
+) -> str:
+    """Search legal profiles and return only a build exactly scored by sIO."""
+    return optimize_profile_with_sio_json(
+        profile_json=profile_json,
+        request_json=request_json,
+        catalog_json=catalog_json,
+        repository_root=repository_root,
+        sio_bundle_dir=sio_bundle_dir,
+        model_path=model_path,
+        gate_path=gate_path,
+    )
+
+
 def build_agent() -> Agent:
     missing = [
         key
@@ -75,15 +132,20 @@ def build_agent() -> Agent:
     return Agent(
         name="Survivor.io Assistant",
         instructions=(
-            "You are a Survivor.io research and project assistant. Use web search for "
-            "current claims and distinguish official sources, community sources, "
-            "estimates, and unknowns. The damage formula is not verified, so never "
-            "invent damage calculations. For optimizer work, use the transition tools "
-            "to enforce inventory conservation, dependencies, refunds, partial losses, "
-            "one-way gates, and natural battle resets. Unknown refund behavior is a "
-            "hard blocker. Prefer read-only tools. Never send, publish, delete, purchase, "
-            "merge, or modify an external system without explicit approval for that "
-            "exact action. Never reveal credentials or private data."
+            "You are a Survivor.io research and optimization assistant. Use web search "
+            "for current claims and distinguish official sources, community sources, "
+            "estimates, and unknowns. Never infer calculator mutations from prose. "
+            "Validate a profile and enumerate legal actions before optimization. The AI "
+            "may guide search order and prune logically invalid or clearly poor paths, "
+            "but it may never provide damage, a winner, or a replacement multiplier. "
+            "Only the local sIO calculator oracle may score profiles or decide the best "
+            "build. Recompute automatic unlocks after every state change, including "
+            "collection sets and the four-type Y5 Xeno gate. Preserve required unlocks, "
+            "inventory conservation, dependencies, refunds, partial losses, one-way "
+            "actions, and natural battle resets. A one-way action is not a zero-return "
+            "refund. Prefer read-only tools. Never send, publish, delete, purchase, merge, "
+            "or modify an external system without explicit approval for that exact action. "
+            "Never reveal credentials or private data."
         ),
         tools=[
             WebSearchTool(),
@@ -91,6 +153,9 @@ def build_agent() -> Agent:
             preview_resource_refund,
             plan_build_reset,
             list_verified_transition_rules,
+            validate_optimizer_profile,
+            list_optimizer_options,
+            optimize_profile_with_sio,
             *session.tools(),
         ],
     )
