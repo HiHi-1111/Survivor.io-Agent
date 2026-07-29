@@ -8,31 +8,36 @@ A Python research and optimization agent for Survivor.io.
 - Store and retrieve verified game knowledge
 - Model legal inventory and build state transitions
 - Track full refunds, partial refunds, one-way gates, dependencies, and unknown rules
-- Branch a build for different modes without mutating the original account state
-- Reset temporary battle-run state separately from permanent account progression
+- Recompute automatic unlocks after every state change
+- Parse an account profile and enumerate affordable legal actions
+- Search refund-and-rebuild paths for different game modes
+- Score candidate profiles with the local sIO Tools calculator bundle
+- Learn a pruning surrogate from exact sIO results while preserving exact final verification
 - Connect external services safely through Composio
 
-The project intentionally does **not** contain a trusted damage formula yet. Unknown damage
-and refund behavior remains blocked until it is verified.
+The repository does not contain a hand-written replacement damage formula. The optimizer
+calls the calculator module from a user-supplied sIO Tools bundle and treats that output as
+the only damage oracle.
 
 ## Quick start
 
-1. Install Python 3.10+ and `uv`.
+1. Install Python 3.10+, Node.js, and `uv`.
 2. Copy `.env.example` to `.env`.
 3. Add your API keys to `.env`.
-4. Install dependencies:
+4. Extract the supplied sIO Tools snapshot and set `SIO_BUNDLE_DIR` to its directory.
+5. Install dependencies:
 
 ```bash
 uv sync
 ```
 
-5. Run tests:
+6. Run tests:
 
 ```bash
 uv run pytest
 ```
 
-6. Run the agent:
+7. Run the agent:
 
 ```bash
 uv run python agent.py
@@ -48,11 +53,29 @@ Refund classes:
 
 - `full`: exact recorded inputs can be returned
 - `partial`: only verified percentages or fixed returns are returned
-- `none`: irreversible one-way conversion
+- `none`: irreversible one-way conversion, not a refund
 - `conditional`: refundable only when explicit verified conditions are present
 - `unknown`: hard blocker until the current return table is verified
 
 See [`docs/STATE_TRANSITIONS.md`](docs/STATE_TRANSITIONS.md) for schemas and examples.
+
+## Profile optimizer
+
+The profile optimizer:
+
+1. replays the account ledger
+2. recomputes collection-set, Xeno, and other derived unlocks
+3. lists affordable purchases, loadout changes, and verified refund paths
+4. allows AI only to order or prune the search tree
+5. scores selected candidates with sIO
+6. returns only an exactly scored profile
+
+Identical calculator payloads are cached. A persisted surrogate and per-mode action policy
+learn from exact sIO results and can reduce future calculator calls using confidence bounds
+and periodic exact exploration.
+
+See [`docs/OPTIMIZER_SEARCH.md`](docs/OPTIMIZER_SEARCH.md) for profile, catalog, unlock, and
+sIO adapter details.
 
 ## Safety model
 

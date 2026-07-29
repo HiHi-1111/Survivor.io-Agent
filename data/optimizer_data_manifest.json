@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "purpose": "Logical unlock discovery only. Calculator mutations must come from verified structured fields, never prose inference.",
+  "files": [
+    {
+      "path": "survivor_io_collection_sets_summary.csv",
+      "role": "Automatic collectible-set membership and unlock derivation",
+      "trust_rule": "Only rows whose member list is marked exact are auto-derived"
+    },
+    {
+      "path": "data/survivor_io_normal_pets_summary.csv",
+      "role": "Source-only normal-pet awakening type mapping for the four-type Y5 Xeno gate",
+      "trust_rule": "Collaboration pets without supported awakening groups are excluded"
+    }
+  ],
+  "explicitly_not_used": [
+    "model-derived damage coefficients",
+    "AI-written rankings",
+    "prose-to-stat inference",
+    "unverified refund outputs"
+  ]
+}

@@ -1,4 +1,37 @@
+from .catalog import (
+    ActionCatalog,
+    CandidateGenerator,
+    CandidateOperation,
+    CollectionSetDefinition,
+    DerivedUnlockEngine,
+    DerivedUnlockRule,
+    OptimizerAction,
+    Requirement,
+    SioMutation,
+)
+from .learning import (
+    AdaptiveGatePolicy,
+    AdvisorDecision,
+    FeatureEncoder,
+    OnlineLogSurrogate,
+    Prediction,
+    SafePathAdvisor,
+)
+from .oracle import CachedOracle, DamageOracle, SIOBundleOracle, payload_hash
+from .profile import (
+    ModeGoal,
+    OptimizationProfile,
+    canonical_profile_hash,
+    load_profile,
+)
 from .rules import VERIFIED_RULES, get_rule_registry
+from .search import (
+    OptimizationRequest,
+    OptimizationResult,
+    ProfileOptimizer,
+    SearchNode,
+    operation_to_dict,
+)
 from .transitions import (
     ActionReceipt,
     BuildState,
@@ -19,22 +52,50 @@ from .transitions import (
 )
 
 __all__ = [
+    "ActionCatalog",
     "ActionReceipt",
+    "AdaptiveGatePolicy",
+    "AdvisorDecision",
     "BuildState",
+    "CachedOracle",
+    "CandidateGenerator",
+    "CandidateOperation",
+    "CollectionSetDefinition",
+    "DamageOracle",
     "DependencyBlockedError",
+    "DerivedUnlockEngine",
+    "DerivedUnlockRule",
+    "FeatureEncoder",
     "GameObject",
     "InsufficientResourceError",
     "MissingRequirementError",
+    "ModeGoal",
+    "OnlineLogSurrogate",
+    "OptimizationProfile",
+    "OptimizationRequest",
+    "OptimizationResult",
+    "OptimizerAction",
+    "Prediction",
+    "ProfileOptimizer",
     "RefundBlockedError",
     "RefundKind",
     "RefundPolicy",
     "RefundPreview",
+    "Requirement",
     "ResetPlan",
+    "SIOBundleOracle",
+    "SafePathAdvisor",
+    "SearchNode",
+    "SioMutation",
     "StateTransitionEngine",
     "TransitionAction",
     "TransitionError",
     "TransitionRule",
     "VERIFIED_RULES",
+    "canonical_profile_hash",
     "get_rule_registry",
+    "load_profile",
+    "operation_to_dict",
+    "payload_hash",
     "result_to_json",
 ]
