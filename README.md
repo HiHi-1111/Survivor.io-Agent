@@ -13,6 +13,7 @@ A Python research and optimization agent for Survivor.io.
 - Search refund-and-rebuild paths for different game modes
 - Score candidate profiles with the local sIO Tools calculator bundle
 - Learn a pruning surrogate from exact sIO results while preserving exact final verification
+- Train the surrogate locally with CPU search/sIO scoring and NVIDIA CUDA acceleration
 - Connect external services safely through Composio
 
 The repository does not contain a hand-written replacement damage formula. The optimizer
@@ -76,6 +77,20 @@ and periodic exact exploration.
 
 See [`docs/OPTIMIZER_SEARCH.md`](docs/OPTIMIZER_SEARCH.md) for profile, catalog, unlock, and
 sIO adapter details.
+
+## Local CPU and GPU training
+
+The local training runner uses the CPU for legal-state search and exact sIO calculations,
+then trains a neural surrogate on an NVIDIA GPU with mixed precision. It saves resumable
+model checkpoints, gate statistics, and JSONL episode logs.
+
+```bash
+uv run python scripts/check_training_hardware.py
+uv run python scripts/train_optimizer.py --help
+```
+
+See [`docs/LOCAL_TRAINING.md`](docs/LOCAL_TRAINING.md) for Windows, RTX 4070, checkpoint,
+and resume instructions.
 
 ## Safety model
 
