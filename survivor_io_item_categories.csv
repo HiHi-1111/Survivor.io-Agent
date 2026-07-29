@@ -1,0 +1,25 @@
+﻿Primary_Category,Subcategory,Definition,Optimizer_Treatment,Typical_DPS_Relevance
+Choice Consumables,Selector / Choice Item,"Player chooses one reward, item, shard, core, pet, tech part or equipment option.",Evaluate every eligible option before opening.,Usually High
+Currencies,Permanent Currency,Long-lived currency spent in shops or systems.,Track balance and every possible spend.,Depends on spend
+Currencies,Event Currency,Temporary or recurring event currency.,Optimize exchange shop before expiry.,Depends on exchange
+Currencies,Clan Currency,Currency spent in the Clan Shop.,"Compare stock, limits and progression bottlenecks.",Depends on spend
+Currencies,Mode Currency / Ticket,Currency or entry item tied to a game mode.,Value against mode rewards or saved Gems.,Conditional
+Keys,Chest Key,Consumes one key to open its linked chest.,Use expected-value tables and event chest-opening milestones.,Indirect
+Upgrade Materials,Survivor Material,"Used to level, awaken, reset or unlock Survivors.",Score by owner/global DPS gain.,High
+Upgrade Materials,Equipment / Forge Material,"Used in Astral Forge, Cosmic Cast, Chaos Fusion or Xeno Transmute.",Compare DPS gain per Relic/Faction/Transmute Core.,Very High
+Upgrade Materials,Tech Part Material,"Used for tech resonance, Twinborn and related upgrades.","Compare multiplier, fusion and Overload alternatives.",Very High
+Upgrade Materials,Normal Pet Material,Used for pet levels and awakening.,"Separate pet DPS, owner buffs and affection ATK.",High
+Upgrade Materials,Xeno Pet Material,"Used to summon, awaken or reforge Xeno Pets.",Compare owner buff and resonance gains.,High
+Upgrade Materials,Collectible Material,"Used to star, reset or obtain collectibles.",Link to exact global or system-specific bonus.,High
+Equipment,Equipment Choice Container,Choose a gear item at the displayed rarity.,Value each gear option using current forge and inventory needs.,High
+Equipment,Equipment Random Container,Awards random equipment.,Use expected value rather than selector value.,Indirect
+Tech Parts,Tech Part Choice Container,Choose one tech part.,Preserve Twinborn pairs and resonance dependencies.,High
+Pets,Pet Choice Container,Choose a normal pet.,"Value awakening, owner buffs, affection and Xeno unlock dependency.",High
+Pets,Xeno Pet Choice Container,Choose a Xeno Pet.,"Value owner bonus, resonance skills and existing copies.",High
+Collectibles,Collectible Choice Container,Choose a collectible from an eligible pool.,Value exact star breakpoint and linked gear/tech effect.,High
+Utility Consumables,Reset / Revive / Utility,"Direct-use item that resets, revives, rerolls or skips content.",Value the refunded resources or Gems/time saved.,Conditional
+Containers,Random Reward Container,Opens into a random reward.,Use probability-weighted expected value.,Indirect
+Event Items,Event Resource,Temporary resource used inside one event.,Spend before expiry and compare milestone conversion.,Event dependent
+Cosmetics,Costume / Avatar,Owned cosmetic or visual item.,Exclude unless a verified stat bonus exists.,Usually none
+Survivors,Survivor,Character record rather than a consumable.,Handled by the Survivor dataset.,Reference
+Collectibles,Individual Collectible,Owned collectible record rather than a container.,Handled by collectible and set datasets.,Reference
