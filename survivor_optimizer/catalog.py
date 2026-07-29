@@ -121,14 +121,21 @@ class OptimizerAction:
 
     @classmethod
     def from_dict(cls, data: Mapping[str, Any]) -> OptimizerAction:
-        transition_data = dict(data.get("transition", data))
-        transition_data.setdefault("action_id", str(data.get("action_key", transition_data.get("action_id"))))
+        transition_data = copy.deepcopy(dict(data.get("transition", data)))
+        transition_data.setdefault(
+            "action_id", str(data.get("action_key", transition_data.get("action_id")))
+        )
+        inverse_data = copy.deepcopy(data.get("inverse_sio_mutation"))
+        if inverse_data:
+            metadata = copy.deepcopy(dict(transition_data.get("metadata", {})))
+            metadata.setdefault("sio_inverse_mutation", inverse_data)
+            transition_data["metadata"] = metadata
         return cls(
             action_key=str(data.get("action_key", transition_data["action_id"])),
             transition=TransitionAction.from_dict(transition_data),
             requirements=tuple(Requirement.from_dict(v) for v in data.get("requirements", [])),
             sio_mutation=SioMutation.from_dict(data.get("sio_mutation")),
-            inverse_sio_mutation=SioMutation.from_dict(data.get("inverse_sio_mutation")),
+            inverse_sio_mutation=SioMutation.from_dict(inverse_data),
             tags=tuple(str(v) for v in data.get("tags", [])),
             source_status=str(data.get("source_status", "")),
             source_urls=tuple(str(v) for v in data.get("source_urls", [])),
@@ -217,7 +224,10 @@ class ActionCatalog:
                         for index in range(1, 5)
                         if row.get(f"Collectible_{index}", "").strip()
                     )
-                    exact = "member list transcribed" in status.lower() or "exact garrytools" in status.lower()
+                    exact = (
+                        "member list transcribed" in status.lower()
+                        or "exact garrytools" in status.lower()
+                    )
                     if members:
                         catalog.collection_sets.append(
                             CollectionSetDefinition(
@@ -339,7 +349,11 @@ class CandidateGenerator:
             kind = rule.refund_policy.kind.value
             if kind == "none" and not allow_irreversible:
                 continue
-            if kind == "unknown" and not allow_unknown_refund_forward and not action.allows_unknown_refund:
+            if (
+                kind == "unknown"
+                and not allow_unknown_refund_forward
+                and not action.allows_unknown_refund
+            ):
                 continue
             branch = state.clone()
             try:
@@ -395,8 +409,18 @@ def _awakening_stage_order(state: Mapping[str, Any]) -> int:
     if "awakening_order" in state:
         return int(state["awakening_order"])
     stage = str(state.get("awakening_stage", state.get("awakening", ""))).upper()
-    mapping = {"Y1": 1, "Y2": 2, "Y3": 3, "Y4": 4, "Y5": 5,
-               "R1": 6, "R2": 7, "R3": 8, "R4": 9, "R5": 10}
+    mapping = {
+        "Y1": 1,
+        "Y2": 2,
+        "Y3": 3,
+        "Y4": 4,
+        "Y5": 5,
+        "R1": 6,
+        "R2": 7,
+        "R3": 8,
+        "R4": 9,
+        "R5": 10,
+    }
     return mapping.get(stage, 0)
 
 
