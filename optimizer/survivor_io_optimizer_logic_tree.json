@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "safety_default": "Unknown refund behavior is non-refundable and cannot create inventory.",
+  "flow": [
+    {
+      "node": "snapshot",
+      "test": "Clone current player state and inventory",
+      "fail": "invalid_state"
+    },
+    {
+      "node": "unlock_gate",
+      "test": "All chapter, ownership, quality, event and account gates are met",
+      "fail": "locked_action"
+    },
+    {
+      "node": "rule_lookup",
+      "test": "An action-specific transition rule exists",
+      "fail": "unknown_blocked"
+    },
+    {
+      "node": "resource_check",
+      "test": "Every consumed resource exists once and is not reserved by another dependency",
+      "fail": "inventory_or_dependency_conflict"
+    },
+    {
+      "node": "policy_branch",
+      "branches": {
+        "FULL_REFUND": "Return whitelisted tracked investment at 100%",
+        "FULL_REFUND_CONVERTED": "Return equivalent reusable material",
+        "PARTIAL_REFUND": "Return verified percentage; log loss",
+        "SALVAGE_FIXED_RETURN": "Destroy target; return only fixed verified output",
+        "REVERSIBLE_REALLOCATION": "Return assigned resources",
+        "REVERSIBLE_STATE_CHANGE": "Change state without inventory movement",
+        "TARGET_DEPENDENT": "Resolve target policy; missing target policy becomes unknown",
+        "NO_REFUND": "Consume permanently and mark one-way",
+        "NO_REFUND_OR_EXPIRY": "Consume/expire permanently",
+        "REVERSIBLE_UNKNOWN_RETURN": "State-only preview; no inventory credit",
+        "UNKNOWN_BLOCKED": "Forward-only if explicitly allowed; no reverse/refund"
+      }
+    },
+    {
+      "node": "apply",
+      "action": "Apply costs, returns, state changes, losses and irreversible markers to cloned branch"
+    },
+    {
+      "node": "rebuild_test",
+      "test": "Every action after checkpoint has a verified reverse and required resources remain",
+      "pass": "rebuildable_branch",
+      "fail": "one_way_or_lossy_branch"
+    }
+  ]
+}
